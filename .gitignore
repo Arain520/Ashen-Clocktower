@@ -1,9 +1,13 @@
-Library/
-Temp/
-Obj/
-Build/
-Logs/
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
 UserSettings/
+
+MemoryCaptures/
+Recordings/
 
 *.csproj
 *.unityproj
@@ -11,3 +15,10 @@ UserSettings/
 *.user
 *.tmp
 *.log
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
