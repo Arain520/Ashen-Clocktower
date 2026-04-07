@@ -61,12 +61,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enemy\EnemyPatrol.cs" />
+    <Compile Include="Assets\Scripts\Enemy\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Camera\SimpleCameraFollow.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAnimationEventRelay.cs" />
     <Compile Include="Assets\Scripts\Core\SpriteFlash.cs" />
     <Compile Include="Assets\Audio.cs" />
+    <Compile Include="Assets\Scripts\Enemy\FlyingEnemyHealth.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
+    <Compile Include="Assets\Scripts\Enemy\FlyingEnemyAI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAnimationController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyContactDamage.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
   </ItemGroup>

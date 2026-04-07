@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("组件引用")]
-    [SerializeField] private Animator animator;
-
+    
     [Header("移动参数")]
     [SerializeField] private float moveSpeed = 5f;
 
@@ -32,12 +30,14 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanControl => controlLockCount == 0;
 
+    public float MoveInput => moveInput;
+    public bool IsGrounded => isGrounded;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
         Debug.Log("找到 Rigidbody2D: " + (rb != null));
-        Debug.Log("Animator 引用: " + (animator != null ? animator.gameObject.name : "没有拖入 Animator"));
     }
 
     private void Update()
@@ -56,8 +56,6 @@ public class PlayerMovement : MonoBehaviour
         {
             moveInput = 0f;
         }
-
-        UpdateAnimation();
     }
 
     private void FixedUpdate()
@@ -132,18 +130,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.localScale = localScale;
-    }
-
-    private void UpdateAnimation()
-    {
-        if (animator == null)
-            return;
-
-        bool isRunning = moveInput != 0f && CanControl;
-
-        animator.SetBool("isRunning", isRunning);
-        animator.SetBool("isGrounded", isGrounded);
-        animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
     public void AddControlLock()

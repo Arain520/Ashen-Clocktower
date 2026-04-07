@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c3ffb4a9d9b39f147824e15826c22af7
+guid: 8cb032b2cb72ab040b7bd530373a80fc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -95,49 +95,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: "ChatGPT Image 2026\u5E743\u670816\u65E5 21_35_43_0"
-      rect:
-        serializedVersion: 2
-        x: 146
-        y: 168
-        width: 747
-        height: 786
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f490c26a1ac4e64ab695fdd5e6e7441
-      internalID: -117989307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "ChatGPT Image 2026\u5E743\u670816\u65E5 21_35_43_1"
-      rect:
-        serializedVersion: 2
-        x: 581
-        y: 148
-        width: 4
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 432f1802f0bbc5b428683111c21b3c82
-      internalID: -1308144283
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -148,9 +106,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      "ChatGPT Image 2026\u5E743\u670816\u65E5 21_35_43_0": -117989307
-      "ChatGPT Image 2026\u5E743\u670816\u65E5 21_35_43_1": -1308144283
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

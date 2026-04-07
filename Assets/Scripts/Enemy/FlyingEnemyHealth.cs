@@ -1,28 +1,25 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour, IDamageable
+public class FlyingEnemyHealth : MonoBehaviour, IDamageable
 {
-    [Header("敌人血量")]
-    [SerializeField] private int maxHealth = 3;
+    [Header("飞天怪血量")]
+    [SerializeField] private int maxHealth = 2;
 
     [Header("受击参数")]
-    [SerializeField] private float knockbackForceX = 4f;
-    [SerializeField] private float knockbackForceY = 2f;
-    [SerializeField] private float hurtTime = 0.2f;
+    [SerializeField] private float knockbackDistance = 0.5f;
+    [SerializeField] private float knockbackTime = 0.15f;
 
     private int currentHealth;
     private bool isHurt = false;
 
-    private Rigidbody2D rb;
-    private EnemyPatrolChase enemyPatrolChase;
     private SpriteFlash spriteFlash;
+    private FlyingEnemyAI flyingEnemyAI;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        enemyPatrolChase = GetComponent<EnemyPatrolChase>();
         spriteFlash = GetComponent<SpriteFlash>();
+        flyingEnemyAI = GetComponent<FlyingEnemyAI>();
     }
 
     private void Start()
@@ -55,21 +52,26 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         isHurt = true;
 
-        if (enemyPatrolChase != null)
+        if (flyingEnemyAI != null)
         {
-            enemyPatrolChase.SetCanMove(false);
+            flyingEnemyAI.SetCanMove(false);
         }
 
-        float direction = transform.position.x > attackerPosition.x ? 1f : -1f;
+        Vector3 startPos = transform.position;
+        float dir = transform.position.x > attackerPosition.x ? 1f : -1f;
+        Vector3 targetPos = startPos + new Vector3(dir * knockbackDistance, 0.2f, 0f);
 
-        rb.velocity = Vector2.zero;
-        rb.AddForce(new Vector2(direction * knockbackForceX, knockbackForceY), ForceMode2D.Impulse);
-
-        yield return new WaitForSeconds(hurtTime);
-
-        if (enemyPatrolChase != null)
+        float timer = 0f;
+        while (timer < knockbackTime)
         {
-            enemyPatrolChase.SetCanMove(true);
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPos, targetPos, timer / knockbackTime);
+            yield return null;
+        }
+
+        if (flyingEnemyAI != null)
+        {
+            flyingEnemyAI.SetCanMove(true);
         }
 
         isHurt = false;

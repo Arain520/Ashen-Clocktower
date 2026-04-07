@@ -20,6 +20,8 @@ public class PlayerCombat : MonoBehaviour
 
     private float attackTimer;
     private bool isAttacking = false;
+    public bool IsAttacking => isAttacking;
+    private bool hasDealtDamageThisAttack = false;
 
     private PlayerMovement playerMovement;
 
@@ -43,6 +45,7 @@ public class PlayerCombat : MonoBehaviour
 
     private IEnumerator AttackRoutine()
     {
+        hasDealtDamageThisAttack = false;
         isAttacking = true;
         attackTimer = attackCooldown;
 
@@ -62,9 +65,6 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("没有正确获取动画！");
         }
 
-            // 这里先立即判定一刀
-            AttackHitCheck();
-
         yield return new WaitForSeconds(attackLockTime);
 
         if (playerMovement != null)
@@ -75,19 +75,26 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = false;
     }
 
-    private void AttackHitCheck()
+    public void AttackHitCheck()
     {
+        if (isAttacking)
+            return;
+        if (hasDealtDamageThisAttack)
+            return;
+
+        hasDealtDamageThisAttack= true;
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
         Debug.Log("发动攻击，命中数量：" + hitEnemies.Length);
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+            IDamageable damageable = enemy.GetComponentInParent<IDamageable>();
 
-            if (enemyHealth != null)
+            if (damageable != null)
             {
-                enemyHealth.TakeDamage(attackDamage, transform.position);
+                damageable.TakeDamage(attackDamage, transform.position);
             }
         }
     }

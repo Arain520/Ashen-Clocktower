@@ -15,6 +15,12 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
     private bool isInvincible = false;
 
+    private bool isHurt = false;
+    private bool isDead = false;
+
+    public bool IsHurt => isHurt;
+    public bool IsDead => isDead;
+
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
     private SpriteFlash spriteFlash;
@@ -33,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 attackerPosition)
     {
-        if (isInvincible)
+        if (isInvincible || isDead)
             return;
 
         currentHealth -= damage;
@@ -55,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator HurtRoutine(Vector2 attackerPosition)
     {
         isInvincible = true;
+        isHurt = true;
 
         if (playerMovement != null)
         {
@@ -74,6 +81,8 @@ public class PlayerHealth : MonoBehaviour
             playerMovement.RemoveControlLock();
         }
 
+        isHurt = false;
+
         float remainInvincibleTime = Mathf.Max(0f, invincibleTime - hurtLockTime);
         yield return new WaitForSeconds(remainInvincibleTime);
 
@@ -82,6 +91,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        if(isDead)
+            return;
+
+        isDead = true;
         Debug.Log("ÕÊº“À¿Õˆ");
         gameObject.SetActive(false);
     }
