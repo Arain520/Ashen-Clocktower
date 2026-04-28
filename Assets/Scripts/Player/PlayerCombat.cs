@@ -15,8 +15,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Transform attackPoint;
 
     [Header("攻击节奏")]
-    [SerializeField] private float attackCooldown = 0.3f;
-    [SerializeField] private float attackLockTime = 0.2f;
+    [SerializeField] private float attackCooldown = 0.6f;
+    [SerializeField] private float attackLockTime = 0.4f;
 
     private float attackTimer;
     private bool isAttacking = false;
@@ -65,6 +65,8 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("没有正确获取动画！");
         }
 
+        //Camera.main.GetComponent<SimpleCameraFollow>().TriggerShake(0.2f);
+
         yield return new WaitForSeconds(attackLockTime);
 
         if (playerMovement != null)
@@ -87,7 +89,10 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
         Debug.Log("发动攻击，命中数量：" + hitEnemies.Length);
-
+        if(hitEnemies.Length > 0)
+        {
+            Camera.main.GetComponent<SimpleCameraFollow>().TriggerShake(0.2f);
+        }
         foreach (Collider2D enemy in hitEnemies)
         {
             IDamageable damageable = enemy.GetComponentInParent<IDamageable>();

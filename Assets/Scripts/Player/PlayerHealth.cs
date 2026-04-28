@@ -43,6 +43,9 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         currentHealth -= damage;
+
+        Camera.main.GetComponent<SimpleCameraFollow>().TriggerShake(0.2f);
+
         Debug.Log("玩家受伤，当前血量：" + currentHealth);
 
         if (spriteFlash != null)
