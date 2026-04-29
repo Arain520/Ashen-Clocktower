@@ -25,6 +25,9 @@ public class PlayerHealth : MonoBehaviour
     private PlayerMovement playerMovement;
     private SpriteFlash spriteFlash;
 
+    public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

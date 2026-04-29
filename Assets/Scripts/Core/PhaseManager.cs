@@ -124,7 +124,7 @@ public class PhaseManager : MonoBehaviour
         isAshPhase = true;  // 设定当前为灰烬态
 
         // 延长灰烬态持续时间（根据灰烬值）
-        currentAshPhaseDuration = ashPhaseDuration + (playerAshValue.AshValue / 10f);  // 每 10 点灰烬值增加 1 秒
+        currentAshPhaseDuration = ashPhaseDuration + (playerAshValue.ashValue / 10f);  // 每 10 点灰烬值增加 1 秒
         // 启动灰烬态定时器
         StartCoroutine(AshPhaseTimer());
     }
