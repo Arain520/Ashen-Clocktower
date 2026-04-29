@@ -3,7 +3,23 @@
   "WorkspaceRootPath": "D:\\UNITY\\AshenClockTower\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|d:\\unity\\ashenclocktower\\assets\\scripts\\core\\textdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|d:\\unity\\ashenclocktower\\assets\\scripts\\core\\phasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\core\\phasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|D:\\UNITY\\AshenClockTower\\assets\\scripts\\player\\playeranimationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playeranimationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|D:\\UNITY\\AshenClockTower\\assets\\scripts\\player\\playerphasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playerphasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|D:\\UNITY\\AshenClockTower\\assets\\scripts\\shader\\asheffectshader.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\shader\\asheffectshader.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|D:\\UNITY\\AshenClockTower\\assets\\scripts\\core\\textdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE39B795-7977-3C3B-DA73-1746817351C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\core\\textdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -82,11 +98,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerPhaseController.cs",
+              "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerPhaseController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerPhaseController.cs",
+              "ToolTip": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerPhaseController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerPhaseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T06:25:21.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerAnimationController.cs",
+              "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerAnimationController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerAnimationController.cs",
+              "ToolTip": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerAnimationController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerAnimationController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T06:25:13.097Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PhaseManager.cs",
+              "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Core\\PhaseManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\PhaseManager.cs",
+              "ToolTip": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Core\\PhaseManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Core\\PhaseManager.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAwA0AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T06:12:17.216Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AshEffectShader.shader",
+              "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Shader\\AshEffectShader.shader",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Shader\\AshEffectShader.shader",
+              "ToolTip": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Shader\\AshEffectShader.shader",
+              "RelativeToolTip": "Assets\\Scripts\\Shader\\AshEffectShader.shader",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2026-04-29T06:06:49.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "TextDisplay.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Core\\TextDisplay.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\TextDisplay.cs",
@@ -94,12 +159,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\TextDisplay.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAIwDEAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T15:26:50.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T15:26:50.351Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Interactable.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Core\\Interactable.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\Interactable.cs",
@@ -107,12 +171,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\Interactable.cs",
               "ViewState": "AgIAACoAAAAAAAAAAAAowE4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T14:49:41.858Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T14:49:41.858Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "EnemyPatrol.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\EnemyPatrol.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyPatrol.cs",
@@ -124,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "EnemyHealth.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\EnemyHealth.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyHealth.cs",
@@ -136,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "PlayerCombat.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerCombat.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerCombat.cs",
@@ -148,7 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "RangedEnemyPatrolAttack.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\RangedEnemyPatrolAttack.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\RangedEnemyPatrolAttack.cs",
@@ -160,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "EnemyContactDamage.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\EnemyContactDamage.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyContactDamage.cs",
@@ -172,7 +235,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "EnemyProjectile.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\EnemyProjectile.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyProjectile.cs",
@@ -184,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
@@ -196,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "SimpleCameraFollow.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Camera\\SimpleCameraFollow.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Camera\\SimpleCameraFollow.cs",
@@ -208,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerMovement.cs",
@@ -220,7 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "PlayerHealth.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerHealth.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerHealth.cs",
@@ -232,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "PlayerAnimationController.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\PlayerAnimationController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerAnimationController.cs",
@@ -244,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "PlayerAnimationEventRelay.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Player\\PlayerAnimationEventRelay.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerAnimationEventRelay.cs",
@@ -256,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "FlyingEnemyAI.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\FlyingEnemyAI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\FlyingEnemyAI.cs",
@@ -268,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "SpriteFlash.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Core\\SpriteFlash.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SpriteFlash.cs",
@@ -280,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "FlyingEnemyHealth.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\FlyingEnemyHealth.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\FlyingEnemyHealth.cs",
@@ -292,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "IDamageable.cs",
               "DocumentMoniker": "D:\\UNITY\\AshenClockTower\\Assets\\Scripts\\Enemy\\IDamageable.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\IDamageable.cs",
