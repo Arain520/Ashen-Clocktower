@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerStatusUI : MonoBehaviour
 {
@@ -18,10 +18,10 @@ public class PlayerStatusUI : MonoBehaviour
     [Header("灰烬UI")]
     [SerializeField] private Image ashBarFill;
     [SerializeField] private TextMeshProUGUI ashText;
-    [SerializeField] private float ashLerpSpeed = 8f;
+    [SerializeField] private float ashLerpSpeed = 8f;  // 控制灰烬条平滑过渡的速度
 
     private List<Image> healthIcons = new List<Image>();
-    private float currentDisplayedAshRatio = 0f;
+    private float currentDisplayedAshRatio = 0f;  // 当前显示的灰烬值比例
 
     private void Start()
     {
@@ -33,13 +33,13 @@ public class PlayerStatusUI : MonoBehaviour
 
         InitHealthIcons();
         RefreshHealthUI();
-        RefreshAshUI(true);
+        RefreshAshUI(true);  // 初始时立即显示灰烬条
     }
 
     private void Update()
     {
         RefreshHealthUI();
-        RefreshAshUI(false);
+        RefreshAshUI(false);  // 更新灰烬值
     }
 
     private void InitHealthIcons()
@@ -105,6 +105,7 @@ public class PlayerStatusUI : MonoBehaviour
         }
         else
         {
+            // 平滑过渡灰烬值
             currentDisplayedAshRatio = Mathf.Lerp(
                 currentDisplayedAshRatio,
                 targetRatio,
