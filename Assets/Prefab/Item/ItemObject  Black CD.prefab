@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7342643751055629627}
   - component: {fileID: 4758860632403881748}
   m_Layer: 10
-  m_Name: ItemObject  Black CD
+  m_Name: "ItemObject  \u9ED1\u8272\u5531\u7247"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

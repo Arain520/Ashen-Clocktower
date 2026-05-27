@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8133068629182977963}
   - component: {fileID: 2083376458491175582}
   m_Layer: 10
-  m_Name: ItemObject  Health Potion
+  m_Name: "ItemObject  \u751F\u547D\u836F\u6C34"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
