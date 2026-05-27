@@ -134,7 +134,7 @@ public class BlackholeSkill_Controller : MonoBehaviour
     {
         if (keyCodeList.Count <= 0)
         {
-            Debug.LogWarning("No more keys to assign!");
+            Debug.LogWarning("没有可分配的按键了！");
             return;
         }
 

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35465a2b38b7fe4e8e4eb940413103e, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  itemName: Health Potion
+  itemName: 生命药水
   itemType: 0
-  itemDescription: Drink it to increase your current health
+  itemDescription: 饮用后恢复当前生命值。
   itemIcon: {fileID: 21300000, guid: 7c85175dd0e58664ba0c199696c2353d, type: 3}
   itemID: eacf26eeede885c43a780ab7502fccef

@@ -34,7 +34,7 @@ public class PlayerSkillManager : MonoBehaviour
         {
             //直接删掉这个多余脚本所在的对象
             Destroy(instance.gameObject);
-            Debug.Log("Invalid PlayerManager Instance DESTROYED");
+            Debug.Log("已销毁重复的 PlayerSkillManager 实例");
         }
         else
             instance = this;

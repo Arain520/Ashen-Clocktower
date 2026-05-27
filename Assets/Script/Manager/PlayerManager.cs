@@ -58,7 +58,7 @@ public class PlayerManager : MonoBehaviour, ISavesManager
             //Destroy(instance);
             //直接删掉这个多余脚本所在的对象
             Destroy(instance.gameObject);
-            Debug.Log("Invalid GameObject Containing PlayerManager's Instance DESTROYED");
+            Debug.Log("已销毁包含重复 PlayerManager 实例的无效对象");
         }
         else
             instance = this;

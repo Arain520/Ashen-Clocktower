@@ -71,7 +71,7 @@ public class UI_MainMenu : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("Game Exited");
+        Debug.Log("сно╥рямкЁЖ");
         Application.Quit();
     }
     #endregion

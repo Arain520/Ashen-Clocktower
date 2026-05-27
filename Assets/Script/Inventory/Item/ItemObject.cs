@@ -35,7 +35,7 @@ public class ItemObject : MonoBehaviour
         if(collision.GetComponent<Player>() != null && !Inventory.instance.CanAddNewItem())
         {
             //提示背包没有空间
-            PlayerManager.instance.player.fx.CreatPopUpText("No Space", Color.white);
+            PlayerManager.instance.player.fx.CreatPopUpText("背包已满", Color.white);
         }
     }
 }

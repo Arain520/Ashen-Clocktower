@@ -31,12 +31,14 @@ public class PlayerGroundedState : PlayerState
 
         #region BasicInput
         //在地面的状态时（包括Idle和Move），若按空格且在地面上时，则进入跳跃状态
-        if (Input.GetKeyDown(KeyCode.Space) && player.isGround)
+        if (player.HasBufferedJump() && player.isGround)
         {
             //在主要UI显示的时候，不能进行此运动
-            if (UI_MainScene.instance.ActivatedStateOfMainUIs() == true)
+            if (player.IsMainUIBlockingMovement() == true)
                 return;
 
+            //消耗跳跃缓冲，防止同一次输入被其他状态重复使用
+            player.ConsumeBufferedJump();
             stateMachine.ChangeState(player.jumpState);
         }
         //在地面上按下J键或者鼠标左键进入攻击状态
@@ -94,7 +96,7 @@ public class PlayerGroundedState : PlayerState
             if (!PlayerSkillManager.instance.fireballSkill.CanUseSkill())
             {
                 //调用文字弹出效果，提示技能处于冷却
-                PlayerManager.instance.player.fx.CreatPopUpText("Cooldown", Color.white);
+                PlayerManager.instance.player.fx.CreatPopUpText("冷却中", Color.white);
             }
             if (PlayerSkillManager.instance.fireballSkill.CanUseSkill() && !PlayerSkillManager.instance.assignedFireBall)
             {
@@ -117,7 +119,7 @@ public class PlayerGroundedState : PlayerState
             if (!PlayerSkillManager.instance.iceballSkill.CanUseSkill())
             {
                 //调用文字弹出效果，提示技能处于冷却
-                PlayerManager.instance.player.fx.CreatPopUpText("Cooldown", Color.white);
+                PlayerManager.instance.player.fx.CreatPopUpText("冷却中", Color.white);
             }
             if (PlayerSkillManager.instance.iceballSkill.CanUseSkill() && !PlayerSkillManager.instance.assignedIceBall)
             {
@@ -139,7 +141,7 @@ public class PlayerGroundedState : PlayerState
             if (!PlayerSkillManager.instance.blackholeSkill.CanUseSkill())
             {
                 //调用文字弹出效果，提示技能处于冷却
-                PlayerManager.instance.player.fx.CreatPopUpText("Cooldown", Color.white);
+                PlayerManager.instance.player.fx.CreatPopUpText("冷却中", Color.white);
             }
             if (PlayerSkillManager.instance.blackholeSkill.CanUseSkill())
             {

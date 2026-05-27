@@ -14,6 +14,8 @@ public class FireBallSkill : PlayerSkill
 
     public void CreateFireBall(Vector3 _position, int _dir)
     {
+        if (!TryConsumeAshCost())
+            return;
         //Éú³É»ðÇò
         GameObject _newBall = Instantiate(fireballPrefab, _position, transform.rotation);
         //Ë¢ÐÂÀäÈ´

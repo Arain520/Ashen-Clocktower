@@ -14,6 +14,8 @@ public class IceBallSkill : PlayerSkill
 
     public void CreateIceBall(Vector3 _position, int _dir)
     {
+        if (!TryConsumeAshCost())
+            return;
         //Éú³É±ùÇò
         GameObject _newBall = Instantiate(iceballPrefab, _position, transform.rotation);
         //Ë¢ÐÂÀäÈ´

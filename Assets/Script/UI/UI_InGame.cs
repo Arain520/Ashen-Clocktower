@@ -87,7 +87,7 @@ public class UI_InGame : MonoBehaviour
             else
             {
                 //调用文字弹出效果，提示技能处于冷却
-                PlayerManager.instance.player.fx.CreatPopUpText("Cooldown", Color.white);
+                PlayerManager.instance.player.fx.CreatPopUpText("冷却中", Color.white);
             }
         }
     }

@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -616,7 +615,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CONTINUE
+  m_text: "\u7EE7\u7EED\u6E38\u620F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}
   m_sharedMaterial: {fileID: 997478871241681131, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}
@@ -884,7 +883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NEW GAME
+  m_text: "\u65B0\u6E38\u620F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}
   m_sharedMaterial: {fileID: 997478871241681131, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}
@@ -1329,7 +1328,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXIT
+  m_text: "\u9000\u51FA\u6E38\u620F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}
   m_sharedMaterial: {fileID: 997478871241681131, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}
@@ -1437,6 +1436,7 @@ Transform:
   m_Children:
   - {fileID: 1246122807815323272}
   - {fileID: 433396585}
+  - {fileID: 2082166758}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1867235276
@@ -1585,6 +1585,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b32443f557083047a6e573634c5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &2082166757
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1845716257}
+    m_Modifications:
+    - target: {fileID: 6632800759284210882, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_Name
+      value: ChineseFontManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -121.12959
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -64.41599
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.042204767
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+--- !u!4 &2082166758 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6695578551690339453, guid: 959d02d32e7ded4499467133fbdd0626, type: 3}
+  m_PrefabInstance: {fileID: 2082166757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2091939504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,9 +1704,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'METROIDVANIA
-
-    PROTOTYPE'
+  m_text: "\u7070\u70EC\u949F\u5854\nPROTOTYPE"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}
   m_sharedMaterial: {fileID: 997478871241681131, guid: b0b5bfcb27e933644b85d3c7d28d0c57, type: 2}

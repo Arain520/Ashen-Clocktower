@@ -53,7 +53,7 @@ public class SavesManager : MonoBehaviour
         //新建一个游戏存档的数据
         gameData = new GameData();
 
-        Debug.Log("New Game Created!");
+        Debug.Log("已创建新游戏存档！");
     }
     public void LoadGame()
     {
@@ -62,7 +62,7 @@ public class SavesManager : MonoBehaviour
 
         if(this.gameData == null)
         {
-            Debug.Log("No Saved Data Found!");
+            Debug.Log("未找到存档数据！");
             
             //开启新游戏
             NewGame();
@@ -77,7 +77,7 @@ public class SavesManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Game Loaded!");
+        Debug.Log("游戏已读取！");
     }
     public void SaveGame()
     //储存游戏
@@ -92,7 +92,7 @@ public class SavesManager : MonoBehaviour
         //在循环之后存储存档数据
         dataHandler.SaveGameData(gameData);
 
-        Debug.Log("Game Saved!");
+        Debug.Log("游戏已保存！");
     }
     private void OnApplicationQuit()
     //即当退出程序的时候，自动存储一下游戏数据，防止数据丢失

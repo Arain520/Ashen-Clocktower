@@ -38,7 +38,21 @@ public class PlayerAnimationTriggers : MonoBehaviour
             if (beHitEntity.GetComponent<Enemy>() != null)
             {
                 //敌人受到的伤害数值及其效果
-                beHitEntity.GetComponent<EnemyStats>().GetTotalNormalDmgFrom(PlayerManager.instance.player.sts, true, false);
+                EnemyStats enemyStats = beHitEntity.GetComponent<EnemyStats>();
+                bool wasAliveBeforeHit = enemyStats.currentHealth > 0;
+
+                enemyStats.GetTotalNormalDmgFrom(PlayerManager.instance.player.sts, true, false);
+
+                // 灰烬系统：玩家普通攻击命中敌人时获得少量灰烬，击杀时获得额外灰烬。
+                if (AshSystem.Instance != null)
+                {
+                    AshSystem.Instance.AddAsh(3);
+
+                    if (wasAliveBeforeHit && enemyStats.currentHealth <= 0)
+                    {
+                        AshSystem.Instance.AddAsh(15);
+                    }
+                }
             }
         }
     }

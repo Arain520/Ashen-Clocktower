@@ -20,6 +20,8 @@ public class BlackholeSkill : PlayerSkill
 
     public void UseSkill(Vector3 _position)
     {
+        if (!TryConsumeAshCost())
+            return;
         GameObject newBlackhole = Instantiate(blackholePrefab, _position, Quaternion.identity);
 
         BlackholeSkill_Controller newBlackholeScript = newBlackhole.GetComponent<BlackholeSkill_Controller>();

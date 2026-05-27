@@ -63,6 +63,16 @@ public class Player : Entity
     public float jumpForce = 15;
     //人物剩余的可跳跃次数，人物最多可以二段跳
     public int jumpNum = 2;
+    [Header("Jump Feel")]
+    //离开地面后的短时间内仍然允许起跳，提升边缘跳跃手感
+    [SerializeField] private float coyoteTime = 0.12f;
+    //提前按下跳跃键后，在短时间内落地会自动起跳
+    [SerializeField] private float jumpBufferTime = 0.12f;
+    //松开跳跃键时削减向上速度，数值越小轻按跳得越低
+    [Range(0.1f, 1f)]
+    [SerializeField] private float variableJumpHeightMultiplier = 0.5f;
+    private float coyoteTimeCounter;
+    private float jumpBufferCounter;
     #endregion
 
     #region Dash
@@ -178,6 +188,9 @@ public class Player : Entity
 
         base.Update();
 
+        //统一记录跳跃辅助计时器，供各个状态使用
+        UpdateJumpAssistTimers();
+
         //此处是通过MonoBehavior的Update函数来不断调用PlayerState类中的Update函数，不断刷新人物状态
         stateMachine.currentState.Update();
         //控制人物的冲刺状态
@@ -213,6 +226,50 @@ public class Player : Entity
     }
     #endregion
 
+    #region JumpFeel
+    private void UpdateJumpAssistTimers()
+    {
+        if (isGround)
+            coyoteTimeCounter = coyoteTime;
+        else
+            coyoteTimeCounter -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) && !IsMainUIBlockingMovement())
+            jumpBufferCounter = jumpBufferTime;
+        else
+            jumpBufferCounter -= Time.deltaTime;
+    }
+
+    public bool HasBufferedJump()
+    {
+        return jumpBufferCounter > 0;
+    }
+
+    public bool CanUseCoyoteJump()
+    {
+        return coyoteTimeCounter > 0;
+    }
+
+    public void ConsumeBufferedJump()
+    {
+        jumpBufferCounter = 0;
+        coyoteTimeCounter = 0;
+    }
+
+    public void CutJumpHeightOnRelease()
+    {
+        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
+        {
+            //松开跳跃键时降低上升速度，让轻按和长按跳跃高度不同
+            SetVelocity(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
+        }
+    }
+
+    public bool IsMainUIBlockingMovement()
+    {
+        return UI_MainScene.instance != null && UI_MainScene.instance.ActivatedStateOfMainUIs();
+    }
+    #endregion
     #region SlowEntityOverride
     public override void SlowEntityBy(float _slowPercentage, float _slowDuration)
     {

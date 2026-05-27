@@ -28,9 +28,13 @@ public class PlayerJumpState : PlayerUntouchedState
     {
         base.Update();
 
+        //可变跳高：上升阶段松开跳跃键，会更快进入下落
+        player.CutJumpHeightOnRelease();
+
         //当人物在跳跃上升时，若不想等到下坠才能二段跳，再按一下可以快速上升
-        if (Input.GetKeyDown(KeyCode.Space) && player.jumpNum > 0)
+        if (player.HasBufferedJump() && player.jumpNum > 0)
         {
+            player.ConsumeBufferedJump();
             player.stateMachine.ChangeState(player.jumpState);
         }
 

@@ -300,6 +300,29 @@ public class EntityStats : MonoBehaviour
     #endregion
     #endregion
 
+    #region Heal
+    public virtual bool RestoreHealthBy(int _amount)
+    //恢复生命值，并限制在0到最大生命值之间
+    {
+        if (_amount <= 0)
+            return false;
+
+        int _maxHealth = GetFinalMaxHealth();
+
+        if (currentHealth >= _maxHealth)
+            return false;
+
+        currentHealth = Mathf.Clamp(currentHealth + _amount, 0, _maxHealth);
+
+        //回血后通知血条刷新
+        if (onHealthChanged != null)
+        {
+            onHealthChanged();
+        }
+
+        return true;
+    }
+    #endregion
     #region DecreaseDefence
     public void DecreaseDefenceBy(float _percentage, float _duration)
     //防御降低多少百分比，降低多久

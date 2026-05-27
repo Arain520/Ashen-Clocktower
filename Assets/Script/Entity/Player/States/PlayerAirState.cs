@@ -29,6 +29,17 @@ public class PlayerAirState : PlayerUntouchedState
     {
         base.Update();
 
+        //可变跳高：上升阶段松开跳跃键，会更快进入下落
+        player.CutJumpHeightOnRelease();
+
+        //土狼时间：刚离开平台的一小段时间内，仍然允许进行第一次跳跃
+        if (player.HasBufferedJump() && player.CanUseCoyoteJump() && player.jumpNum == 2)
+        {
+            player.ConsumeBufferedJump();
+            player.stateMachine.ChangeState(player.jumpState);
+            return;
+        }
+
         #region DoubleJump
         //当人物从GroundedState直接进入AirState时，给予跳跃次数为1
         if(player.stateMachine.formerState == player.idleState || player.stateMachine.formerState == player.moveState)
@@ -40,8 +51,9 @@ public class PlayerAirState : PlayerUntouchedState
             }
         }
         //当人物在坠落时，若剩余可跳跃次数为1（即进行过一次跳跃），可进行二段跳
-        if (Input.GetKeyDown(KeyCode.Space) && player.jumpNum == 1)
+        if (player.HasBufferedJump() && player.jumpNum == 1)
         {
+            player.ConsumeBufferedJump();
             player.stateMachine.ChangeState(player.jumpState);
         }
         #endregion
@@ -51,6 +63,7 @@ public class PlayerAirState : PlayerUntouchedState
         {
             player.stateMachine.ChangeState(player.idleState);
         }
+
 
         #region Wall
         //如果是从墙跳状态转移过来本状态的，且许可保持原有速度，则需要保持原有水平速度，若按了A/D则结束这种保持

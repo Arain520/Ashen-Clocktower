@@ -45,7 +45,7 @@ public class FileDataHandler
             }
             catch(Exception e)
             {
-                Debug.LogError("Error On Trying To Load GameData From File " + _fullPath + "\n" + e);
+                Debug.LogError("读取存档文件失败：" + _fullPath + "\n" + e);
             }
         }
 
@@ -75,7 +75,7 @@ public class FileDataHandler
         }
         catch(Exception e)
         {
-            Debug.LogError("Error On Trying To Save GameData To File " + _fullPath + "\n" + e);
+            Debug.LogError("保存存档文件失败：" + _fullPath + "\n" + e);
         }
     }
 

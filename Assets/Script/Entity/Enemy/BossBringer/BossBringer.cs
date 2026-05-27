@@ -146,7 +146,7 @@ public class BossBringer : Enemy
 
         if (!GroundBelow() || SomethingIsArround())
         {
-            Debug.Log("Looking for new position");
+            Debug.Log("正在寻找新的传送位置");
             FindPosition();
         }
     }

@@ -70,6 +70,12 @@ public class SwordSkill : PlayerSkill
     //初始化剑的函数，设置为在PlayerAnimationTriggers脚本内的一个激发函数，插入playerThrowsSword动画的某帧触发
     //由于下列都是剑临时体临时使用的变量对象，故在这里创建局部变量
     {
+        if (!TryConsumeAshCost())
+        {
+            ActivateDots(false);
+            return;
+        }
+
         //初始化剑的Unity内对象、位置、旋转
         GameObject _newSword = Instantiate(swordPrefab, PlayerManager.instance.player.transform.position, transform.rotation);
         //链接到剑的控制器

@@ -101,7 +101,7 @@ public class Inventory : MonoBehaviour, ISavesManager
     {
         if (inventoryItemsList.Count >= itemSlotsUIList.Length)
         {
-            Debug.Log("Inventory No More Space");
+            Debug.Log("背包没有剩余空间");
             return false;
         }
         else
