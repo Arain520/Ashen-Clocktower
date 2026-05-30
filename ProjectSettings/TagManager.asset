@@ -16,8 +16,8 @@ TagManager:
   - Projectile
   - Interact
   - Item
-  - 
-  - 
+  - WorldBoundary
+  - NoClimbWall
   - 
   - 
   - 

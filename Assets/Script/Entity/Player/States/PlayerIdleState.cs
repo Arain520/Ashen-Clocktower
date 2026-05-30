@@ -30,6 +30,15 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Update();
 
+        if (player.stateMachine.currentState != this)
+            return;
+
+        //站在地面且没有水平输入时，持续清掉斜坡/不规则碰撞体带来的横向滑动速度。
+        if (player.isGround && xInput == 0)
+        {
+            player.SetVelocity(0, rb.velocity.y);
+        }
+
         //对面对着墙壁的情况做单独的判断：向着墙壁无法转移到Move，不动则保持静止，反走则可以进入Move
         if (player.isWall)
         {
