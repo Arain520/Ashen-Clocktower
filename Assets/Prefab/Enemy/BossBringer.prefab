@@ -308,7 +308,7 @@ MonoBehaviour:
   criticPower:
     baseValue: 0
   primaryPhysicalDamage:
-    baseValue: 0
+    baseValue: 30
   fireAttackDamage:
     baseValue: 0
   iceAttackDamage:

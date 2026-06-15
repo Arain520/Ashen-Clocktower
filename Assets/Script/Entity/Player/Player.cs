@@ -43,6 +43,7 @@ public class Player : Entity
     public UI_MainScene ui { get; private set; }
     public PlayerManager manager { get; private set; }
     public PlayerSkillManager skill { get; private set; }
+    public PlayerCameraLookController cameraLook { get; private set; }
     #endregion
 
     #region Default
@@ -166,6 +167,9 @@ public class Player : Entity
         ui = UI_MainScene.instance;
         manager = PlayerManager.instance;
         skill = PlayerSkillManager.instance;
+        cameraLook = GetComponent<PlayerCameraLookController>();
+        if (cameraLook == null)
+            cameraLook = gameObject.AddComponent<PlayerCameraLookController>();
         #endregion
 
         #region Default
@@ -193,6 +197,7 @@ public class Player : Entity
 
         //此处是通过MonoBehavior的Update函数来不断调用PlayerState类中的Update函数，不断刷新人物状态
         stateMachine.currentState.Update();
+        cameraLook?.UpdateLookByPlayerVelocity(rb.velocity, IsMainUIBlockingMovement());
         //控制人物的冲刺状态
         DashController();
         //控制人物的随身听召唤

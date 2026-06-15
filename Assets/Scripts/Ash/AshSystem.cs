@@ -11,10 +11,14 @@ public class AshSystem : MonoBehaviour
     [Tooltip("最大灰烬值")]
     public float maxAsh = 100f;
 
+    [Header("Blessing")]
+    [SerializeField] private bool hasOldDayBlessing;
+
     public event Action<float, float> OnAshChanged;
 
     public float CurrentAsh => currentAsh;
     public float MaxAsh => maxAsh;
+    public bool HasOldDayBlessing => hasOldDayBlessing;
 
     private void Awake()
     {
@@ -41,6 +45,9 @@ public class AshSystem : MonoBehaviour
 
     public bool ConsumeAsh(int amount)
     {
+        if (hasOldDayBlessing)
+            return true;
+
         if (!HasEnoughAsh(amount))
             return false;
 
@@ -52,6 +59,9 @@ public class AshSystem : MonoBehaviour
 
     public bool ConsumeAsh(float amount)
     {
+        if (hasOldDayBlessing)
+            return true;
+
         if (amount <= 0)
             return true;
 
@@ -66,6 +76,9 @@ public class AshSystem : MonoBehaviour
 
     public bool HasEnoughAsh(int amount)
     {
+        if (hasOldDayBlessing)
+            return true;
+
         return currentAsh >= amount;
     }
 
@@ -79,7 +92,19 @@ public class AshSystem : MonoBehaviour
 
     public bool IsEmpty()
     {
+        if (hasOldDayBlessing)
+            return false;
+
         return currentAsh <= 0;
+    }
+
+    public void SetOldDayBlessing(bool value)
+    {
+        if (hasOldDayBlessing == value)
+            return;
+
+        hasOldDayBlessing = value;
+        NotifyAshChanged();
     }
 
     private void ClampAsh()

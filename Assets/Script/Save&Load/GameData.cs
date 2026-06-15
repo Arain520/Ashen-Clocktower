@@ -18,6 +18,7 @@ public class GameData
     public bool canFireBall;
     public bool canIceBall;
     public bool canBlackhole;
+    public bool hasOldDayBlessing;
     #endregion
 
     #region Stats
@@ -83,13 +84,14 @@ public class GameData
 
         #region Ability
         //默认初始能力许可
-        this.canWallSlide = false;
+        this.canWallSlide = true;
         this.canDash = false;
         this.canDoubleJump = true;
         this.canThrowSword = false;
         this.canFireBall = false;
         this.canIceBall = false;
         this.canBlackhole = false;
+        this.hasOldDayBlessing = false;
         #endregion
 
         #region Stats
@@ -109,9 +111,9 @@ public class GameData
         this.iceAttackDamage = 0;
         this.lightningAttackDamage = 5;
 
-        this.swordDamage = 5;
-        this.fireballDamage = 25;
-        this.iceballDamage = 25;
+        this.swordDamage = 20;
+        this.fireballDamage = 35;
+        this.iceballDamage = 30;
 
         this.evasionChance = 5;
         this.physicalArmor = 10;

@@ -5,12 +5,13 @@ public class AshenObject : MonoBehaviour
     [Header("Visibility")]
     [SerializeField] private bool visibleOnlyInAshenPhase = true;
 
-    private SpriteRenderer[] spriteRenderers;
+    private Renderer[] renderers;
     private Collider2D[] colliders;
 
     private void Awake()
     {
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        // Renderer 可以同时覆盖 SpriteRenderer 和 TilemapRenderer，方便灰烬态 Tilemap 平台使用。
+        renderers = GetComponentsInChildren<Renderer>(true);
         colliders = GetComponentsInChildren<Collider2D>(true);
     }
 
@@ -22,9 +23,9 @@ public class AshenObject : MonoBehaviour
 
     public void SetAshenVisible(bool visible)
     {
-        for (int i = 0; i < spriteRenderers.Length; i++)
+        for (int i = 0; i < renderers.Length; i++)
         {
-            spriteRenderers[i].enabled = visible;
+            renderers[i].enabled = visible;
         }
 
         for (int i = 0; i < colliders.Length; i++)

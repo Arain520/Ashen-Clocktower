@@ -34,7 +34,7 @@ public class PlayerManager : MonoBehaviour, ISavesManager
     public int currency;
     [Header("Ability")]
     //玩家是否能滑墙
-    public bool ability_CanWallSlide;
+    public bool ability_CanWallSlide = true;
     //玩家是否能冲刺
     public bool ability_CanDash;
     //玩家是否能二段跳
@@ -47,6 +47,8 @@ public class PlayerManager : MonoBehaviour, ISavesManager
     public bool ability_CanIceBall;
     //玩家能否释放黑洞
     public bool ability_CanBlackhole;
+    //玩家是否获得旧日赐福
+    public bool ability_HasOldDayBlessing;
     #endregion
 
     private void Awake()
@@ -87,6 +89,13 @@ public class PlayerManager : MonoBehaviour, ISavesManager
         if (_type == AbilityType.CanIceBall) { ability_CanIceBall = false; }
         if (_type == AbilityType.CanBlackhole) { ability_CanBlackhole = false; }
     }
+    public void ActivateOldDayBlessing()
+    {
+        ability_HasOldDayBlessing = true;
+
+        if (AshSystem.Instance != null)
+            AshSystem.Instance.SetOldDayBlessing(true);
+    }
     #endregion
 
     #region ISavesManager
@@ -96,13 +105,17 @@ public class PlayerManager : MonoBehaviour, ISavesManager
         //读取货币数量
         this.currency = _data.currency;
         //读取能力许可
-        ability_CanWallSlide = _data.canWallSlide;
+        ability_CanWallSlide = true;
         ability_CanDash = _data.canDash;
         ability_CanDoubleJump = _data.canDoubleJump;
         ability_CanThrowSword = _data.canThrowSword;
         ability_CanFireBall = _data.canFireBall;
         ability_CanIceBall = _data.canIceBall;
         ability_CanBlackhole = _data.canBlackhole;
+        ability_HasOldDayBlessing = _data.hasOldDayBlessing;
+
+        if (AshSystem.Instance != null)
+            AshSystem.Instance.SetOldDayBlessing(ability_HasOldDayBlessing);
     }
 
     public void SaveData(ref GameData _data)
@@ -117,6 +130,7 @@ public class PlayerManager : MonoBehaviour, ISavesManager
         _data.canFireBall = ability_CanFireBall;
         _data.canIceBall = ability_CanIceBall;
         _data.canBlackhole = ability_CanBlackhole;
+        _data.hasOldDayBlessing = ability_HasOldDayBlessing;
     }
     #endregion
 }

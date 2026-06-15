@@ -49,6 +49,8 @@ public class Slime : Enemy
         sts = GetComponent<SlimeStats>();
         #endregion
 
+        rb.constraints |= RigidbodyConstraints2D.FreezeRotation;
+
         //用站立状态初始化怪物的状态机
         stateMachine.Initialize(idleState);
     }

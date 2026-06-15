@@ -19,14 +19,22 @@ public class PlayerAnimationTriggers : MonoBehaviour
     //此事件在攻击动画进行到造成伤害的那一帧执行
     {
         //触发攻击音效
-        AudioManager.instance.PlaySFX(0, null);
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlaySFX(0, null);
 
         //建立一个临时数组，储存此时在人物攻击检测圈内的所有实体
         Collider2D[] collidersInAttackZone = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
+        HashSet<AshRewardStatue> rewardedStatues = new HashSet<AshRewardStatue>();
         
         //循环遍历上述数组内的敌人实体，进行伤害
         foreach(var beHitEntity in collidersInAttackZone)
         {
+            AshRewardStatue ashRewardStatue = beHitEntity.GetComponentInParent<AshRewardStatue>();
+            if (ashRewardStatue != null && rewardedStatues.Add(ashRewardStatue))
+            {
+                ashRewardStatue.TryGrantAsh();
+            }
+
 
             /*
              * 一个问题：如何拓展到伤害所有被击中的Enemy类而不仅仅是Bringer
@@ -39,6 +47,9 @@ public class PlayerAnimationTriggers : MonoBehaviour
             {
                 //敌人受到的伤害数值及其效果
                 EnemyStats enemyStats = beHitEntity.GetComponent<EnemyStats>();
+                if (enemyStats == null)
+                    continue;
+
                 bool wasAliveBeforeHit = enemyStats.currentHealth > 0;
 
                 enemyStats.GetTotalNormalDmgFrom(PlayerManager.instance.player.sts, true, false);

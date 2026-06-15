@@ -147,9 +147,9 @@ public class EntityStats : MonoBehaviour
 
         #region AttackedFX
         //受攻击的音效
-        AudioManager.instance.PlaySFX(12, null);
+        PlaySFX(12);
         //受攻击的粒子效果，在自己（受攻击者）身上
-        fx.CreateHitFX00(this.transform);
+        CreateHitFX00();
         #endregion
 
         //若是对方基础伤害为0，则不应进行伤害
@@ -164,7 +164,7 @@ public class EntityStats : MonoBehaviour
             this.GetMagicalDamagedBy(_magicDmg);
 
             //魔法元素相关Buff的施加
-            buf.CheckBuffsFrom(_attackingEntity); 
+            ApplyBuffsFrom(_attackingEntity); 
         }
     }
     public virtual void GetTotalSkillDmgFrom(EntityStats _attackingEntity, int _skillDmg, bool _doPhysic, bool _doMagic, bool _ignite, bool _chill, bool _shock)
@@ -195,9 +195,9 @@ public class EntityStats : MonoBehaviour
 
         #region AttackedFX
         //受攻击的音效
-        AudioManager.instance.PlaySFX(12, null);
+        PlaySFX(12);
         //受攻击的粒子效果，在自己（受攻击者）身上
-        fx.CreateHitFX00(this.transform);
+        CreateHitFX00();
         #endregion
 
         //技能一定有伤害，所以不用检查基础伤害是否大于零
@@ -212,7 +212,7 @@ public class EntityStats : MonoBehaviour
             this.GetMagicalDamagedBy(_magicDmg + _skillDmg);
 
             //debuff施加
-            buf.ApplyBuffs(_ignite, _chill, _shock);
+            ApplyBuffs(_ignite, _chill, _shock);
         }
     }
     #endregion
@@ -224,11 +224,11 @@ public class EntityStats : MonoBehaviour
     {
         #region AttackedFX
         //受攻击的材质变化，使得有闪烁的动画效果
-        entity.fx.StartCoroutine("FlashHitFX");
+        FlashHitFX();
 
         //弹出伤害数值文本效果，玩家不弹
         if (entity.GetComponent<Player>() == null)
-            entity.fx.CreatPopUpText(_damage.ToString(), Color.white);
+            CreatePopUpText(_damage.ToString(), Color.white);
 
         //受伤的击退效果
         entity.StartCoroutine("HitKnockback");
@@ -266,11 +266,11 @@ public class EntityStats : MonoBehaviour
     {
         #region AttackedFX
         //受攻击的材质变化，使得有闪烁的动画效果
-        entity.fx.StartCoroutine("FlashHitFX");
+        FlashHitFX();
 
         //弹出伤害数值文本效果，玩家不弹
         if (entity.GetComponent<Player>() == null)
-            entity.fx.CreatPopUpText(_damage.ToString(), Color.cyan);
+            CreatePopUpText(_damage.ToString(), Color.cyan);
 
         //魔法伤害不需要击退，其实是防止有复合伤害时的击退距离更长
         //entity.StartCoroutine("HitKnockback");
@@ -404,11 +404,11 @@ public class EntityStats : MonoBehaviour
         {
             #region EvadeFX
             //文字弹出效果，玩家和怪物都弹
-            entity.fx.CreatPopUpText("Miss", Color.yellow);
+            CreatePopUpText("Miss", Color.yellow);
             //闪避的音效
-            AudioManager.instance.PlaySFX(12, null);
+            PlaySFX(12);
             //闪避的粒子效果，在自己（受攻击者）身上
-            fx.CreateHitFX00(this.transform);
+            CreateHitFX00();
             #endregion
 
             return true;
@@ -423,9 +423,9 @@ public class EntityStats : MonoBehaviour
         {
             #region CritFX
             //受暴击的音效
-            AudioManager.instance.PlaySFX(13, null);
+            PlaySFX(13);
             //被暴击的粒子效果，在自己（受攻击者）身上
-            fx.CreateHitFX01(this.transform);
+            CreateHitFX01();
             #endregion
 
             return true;
@@ -456,6 +456,52 @@ public class EntityStats : MonoBehaviour
 
         //注意这里返回空，不然会报错（因为所有的可能性都需要有返回值）
         return 0;
+    }
+    #endregion
+
+    #region FXHelpers
+
+    private void ApplyBuffsFrom(EntityStats _attackingEntity)
+    {
+        if (buf != null)
+            buf.CheckBuffsFrom(_attackingEntity);
+    }
+
+    private void ApplyBuffs(bool _ignite, bool _chill, bool _shock)
+    {
+        if (buf != null)
+            buf.ApplyBuffs(_ignite, _chill, _shock);
+    }
+    private bool HasFX() => fx != null;
+
+    private void PlaySFX(int _sfxIndex)
+    {
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlaySFX(_sfxIndex, null);
+    }
+
+    private void CreateHitFX00()
+    {
+        if (HasFX())
+            fx.CreateHitFX00(transform);
+    }
+
+    private void CreateHitFX01()
+    {
+        if (HasFX())
+            fx.CreateHitFX01(transform);
+    }
+
+    private void FlashHitFX()
+    {
+        if (HasFX())
+            fx.StartCoroutine("FlashHitFX");
+    }
+
+    private void CreatePopUpText(string _text, Color _color)
+    {
+        if (HasFX())
+            fx.CreatPopUpText(_text, _color);
     }
     #endregion
 }

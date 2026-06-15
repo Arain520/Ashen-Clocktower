@@ -84,7 +84,7 @@ Shader "AshenClocktower/AshenPhaseFilter"
 
                 float3 darkened = lerp(float3(0, 0, 0), _FilterColor.rgb, 1.0 - _Darkness);
                 float3 finalColor = lerp(darkened, _FilterColor.rgb, ashMask);
-                float finalAlpha = saturate(_Intensity + ashMask * _Intensity);
+                float finalAlpha = saturate((_Intensity + ashMask * _Intensity) * _FilterColor.a);
 
                 return fixed4(finalColor, finalAlpha);
             }

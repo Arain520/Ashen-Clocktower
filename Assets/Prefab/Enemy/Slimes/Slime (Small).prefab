@@ -319,6 +319,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5e06547afd6d24a8709be4186749ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignited:
+    status: 0
+    duration: 5
+    damageCooldown: 1
+    burnHealthPercentage: 0.03
+  chilled:
+    status: 0
+    duration: 5
+    slowPercentage: 0.3
+  shocked:
+    status: 0
+    duration: 5
+    defenceDecreasePercentage: 0.2
 --- !u!114 &4650488332902606336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,10 +355,10 @@ MonoBehaviour:
     baseValue: 0
   intelligence:
     baseValue: 0
-  criticPower:
-    baseValue: 150
   criticChance:
     baseValue: 5
+  criticPower:
+    baseValue: 150
   primaryPhysicalDamage:
     baseValue: 10
   fireAttackDamage:
@@ -360,15 +373,6 @@ MonoBehaviour:
     baseValue: 5
   magicalResistance:
     baseValue: 5
-  isIgnited: 0
-  isChilled: 0
-  isShocked: 0
-  ignitedDuration: 5
-  chilledDuration: 5
-  shockedDuration: 5
-  ignitedDamageCooldown: 1
-  burnHealthPercentage: 0.03
-  slowPercentage: 0.3
 --- !u!114 &8148509924891015347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +387,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popUpTextPrefab: {fileID: 7552817167021094733, guid: 7c1ffcf394eeaec43a06adcba5606280, type: 3}
   flashHitMat: {fileID: 2100000, guid: 45632edcda931704b856a07b8c40447d, type: 2}
-  magicalHitMat: {fileID: 2100000, guid: 58eb94208e0812a42bbdd5ab7480b334, type: 2}
   changeMatDuration: 0.1
   hitFX00: {fileID: 3174447369572977870, guid: 7df8732cf4ab25f44b18fddc4dde1cd5, type: 3}
   hitFX01: {fileID: 977621856228250535, guid: 62db31b33c6eca345bf6c9c3d0621c6d, type: 3}

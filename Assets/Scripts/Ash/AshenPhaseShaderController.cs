@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AshenPhaseShaderController : MonoBehaviour
 {
@@ -9,19 +10,26 @@ public class AshenPhaseShaderController : MonoBehaviour
     [SerializeField] private bool enableShaderFilter = true;
     [SerializeField] private Shader filterShader;
     [SerializeField] private Color filterColor = new Color(1f, 0.55f, 0.1f, 1f);
-    [SerializeField] private float maxIntensity = 0.65f;
-    [SerializeField] private float darkness = 0.55f;
+    [SerializeField] private float maxIntensity = 0.28f;
+    [SerializeField, Range(0f, 1f)] private float filterOpacityMultiplier = 0.35f;
+    [SerializeField] private float darkness = 0.22f;
     [SerializeField] private float fadeDuration = 0.25f;
-    [SerializeField] private float cameraDistance = 1f;
+    [SerializeField] private int overlaySortingOrder = short.MaxValue;
 
     [Header("Particles")]
     [SerializeField] private bool enableAshParticles = true;
+    [SerializeField] private bool createParticlesIfMissing = true;
     [SerializeField] private ParticleSystem ashParticles;
+    [SerializeField] private Vector2 particleSizeRange = new Vector2(0.025f, 0.07f);
+    [SerializeField] private Vector2 particleSpeedRange = new Vector2(0.08f, 0.35f);
+    [SerializeField] private float particleRandomDrift = 0.45f;
+    [SerializeField] private float particleNoiseStrength = 0.35f;
 
-    private Camera targetCamera;
     private GameObject overlayObject;
     private Material runtimeMaterial;
     private Coroutine fadeCoroutine;
+    private bool filterTargetActive;
+    private float currentFilterIntensity;
 
     private static readonly int FilterColorId = Shader.PropertyToID("_FilterColor");
     private static readonly int IntensityId = Shader.PropertyToID("_Intensity");
@@ -41,6 +49,7 @@ public class AshenPhaseShaderController : MonoBehaviour
     private void Start()
     {
         SetupOverlay();
+        SetupAshParticles();
         SetFilterIntensity(0f);
 
         if (ashParticles != null)
@@ -51,7 +60,14 @@ public class AshenPhaseShaderController : MonoBehaviour
 
     private void LateUpdate()
     {
-        UpdateOverlaySize();
+        KeepOverlayInFront();
+
+        if (filterTargetActive && fadeCoroutine == null)
+        {
+            currentFilterIntensity = maxIntensity;
+        }
+
+        ApplyFilterProperties();
     }
 
     public void SetAshenVisualActive(bool active)
@@ -64,14 +80,6 @@ public class AshenPhaseShaderController : MonoBehaviour
     {
         if (!enableShaderFilter)
             return;
-
-        targetCamera = Camera.main;
-
-        if (targetCamera == null)
-        {
-            Debug.LogWarning("场景中没有 MainCamera，无法创建灰烬态 Shader 滤镜。");
-            return;
-        }
 
         if (filterShader == null)
         {
@@ -88,57 +96,45 @@ public class AshenPhaseShaderController : MonoBehaviour
         runtimeMaterial.renderQueue = 5000;
 
         overlayObject = new GameObject("AshenPhaseShaderOverlay");
-        overlayObject.transform.SetParent(targetCamera.transform, false);
-        overlayObject.transform.localPosition = new Vector3(0f, 0f, targetCamera.nearClipPlane + cameraDistance);
-        overlayObject.transform.localRotation = Quaternion.identity;
 
-        MeshFilter meshFilter = overlayObject.AddComponent<MeshFilter>();
-        meshFilter.mesh = CreateQuadMesh();
+        Canvas canvas = overlayObject.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = overlaySortingOrder;
 
-        MeshRenderer meshRenderer = overlayObject.AddComponent<MeshRenderer>();
-        meshRenderer.sharedMaterial = runtimeMaterial;
-        meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        meshRenderer.receiveShadows = false;
-        meshRenderer.sortingOrder = 32767;
+        CanvasScaler canvasScaler = overlayObject.AddComponent<CanvasScaler>();
+        canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        canvasScaler.referenceResolution = new Vector2(1920f, 1080f);
+        canvasScaler.matchWidthOrHeight = 0.5f;
+
+        GameObject imageObject = new GameObject("FilterImage");
+        imageObject.transform.SetParent(overlayObject.transform, false);
+
+        Image image = imageObject.AddComponent<Image>();
+        image.material = runtimeMaterial;
+        image.raycastTarget = false;
+
+        RectTransform imageRect = image.rectTransform;
+        imageRect.anchorMin = Vector2.zero;
+        imageRect.anchorMax = Vector2.one;
+        imageRect.offsetMin = Vector2.zero;
+        imageRect.offsetMax = Vector2.zero;
 
         overlayObject.SetActive(false);
-        UpdateOverlaySize();
+        KeepOverlayInFront();
     }
 
-    private Mesh CreateQuadMesh()
+    private void KeepOverlayInFront()
     {
-        Mesh mesh = new Mesh();
-        mesh.name = "AshenPhaseOverlayQuad";
-        mesh.vertices = new[]
-        {
-            new Vector3(-0.5f, -0.5f, 0f),
-            new Vector3(-0.5f, 0.5f, 0f),
-            new Vector3(0.5f, 0.5f, 0f),
-            new Vector3(0.5f, -0.5f, 0f)
-        };
-        mesh.uv = new[]
-        {
-            new Vector2(0f, 0f),
-            new Vector2(0f, 1f),
-            new Vector2(1f, 1f),
-            new Vector2(1f, 0f)
-        };
-        mesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
-        mesh.RecalculateBounds();
-        return mesh;
-    }
-
-    private void UpdateOverlaySize()
-    {
-        if (targetCamera == null || overlayObject == null)
+        if (overlayObject == null)
             return;
 
-        float height = targetCamera.orthographic
-            ? targetCamera.orthographicSize * 2f
-            : 2f * (targetCamera.nearClipPlane + cameraDistance) * Mathf.Tan(targetCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+        Canvas canvas = overlayObject.GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            canvas.sortingOrder = overlaySortingOrder;
+        }
 
-        float width = height * targetCamera.aspect;
-        overlayObject.transform.localScale = new Vector3(width, height, 1f);
+        overlayObject.transform.SetAsLastSibling();
     }
 
     private void SetFilterActive(bool active)
@@ -155,6 +151,7 @@ public class AshenPhaseShaderController : MonoBehaviour
             return;
 
         overlayObject.SetActive(true);
+        filterTargetActive = active;
 
         if (fadeCoroutine != null)
         {
@@ -167,7 +164,7 @@ public class AshenPhaseShaderController : MonoBehaviour
 
     private IEnumerator FadeFilterTo(float targetIntensity)
     {
-        float startIntensity = runtimeMaterial.GetFloat(IntensityId);
+        float startIntensity = currentFilterIntensity;
         float timer = 0f;
 
         while (timer < fadeDuration)
@@ -183,6 +180,7 @@ public class AshenPhaseShaderController : MonoBehaviour
         if (Mathf.Approximately(targetIntensity, 0f) && overlayObject != null)
         {
             overlayObject.SetActive(false);
+            filterTargetActive = false;
         }
     }
 
@@ -191,8 +189,17 @@ public class AshenPhaseShaderController : MonoBehaviour
         if (runtimeMaterial == null)
             return;
 
+        currentFilterIntensity = intensity;
+        ApplyFilterProperties();
+    }
+
+    private void ApplyFilterProperties()
+    {
+        if (runtimeMaterial == null)
+            return;
+
         runtimeMaterial.SetColor(FilterColorId, filterColor);
-        runtimeMaterial.SetFloat(IntensityId, intensity);
+        runtimeMaterial.SetFloat(IntensityId, currentFilterIntensity * filterOpacityMultiplier);
         runtimeMaterial.SetFloat(DarknessId, darkness);
     }
 
@@ -200,6 +207,8 @@ public class AshenPhaseShaderController : MonoBehaviour
     {
         if (!enableAshParticles)
             return;
+
+        SetupAshParticles();
 
         if (ashParticles == null)
         {
@@ -214,6 +223,69 @@ public class AshenPhaseShaderController : MonoBehaviour
         else
         {
             ashParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+    }
+
+    private void SetupAshParticles()
+    {
+        if (!enableAshParticles)
+            return;
+
+        if (ashParticles == null && createParticlesIfMissing)
+        {
+            Transform parent = transform;
+            Camera mainCamera = Camera.main;
+
+            if (mainCamera != null)
+            {
+                parent = mainCamera.transform;
+            }
+
+            GameObject particleObject = new GameObject("AshenPhaseParticles");
+            particleObject.transform.SetParent(parent, false);
+            particleObject.transform.localPosition = new Vector3(0f, 0f, 1f);
+            ashParticles = particleObject.AddComponent<ParticleSystem>();
+        }
+
+        if (ashParticles == null)
+            return;
+
+        ParticleSystem.MainModule main = ashParticles.main;
+        main.loop = true;
+        main.playOnAwake = false;
+        main.startLifetime = new ParticleSystem.MinMaxCurve(1.8f, 3.4f);
+        main.startSpeed = new ParticleSystem.MinMaxCurve(particleSpeedRange.x, particleSpeedRange.y);
+        main.startSize = new ParticleSystem.MinMaxCurve(particleSizeRange.x, particleSizeRange.y);
+        main.startRotation = new ParticleSystem.MinMaxCurve(-Mathf.PI, Mathf.PI);
+        main.simulationSpace = ParticleSystemSimulationSpace.Local;
+
+        ParticleSystem.EmissionModule emission = ashParticles.emission;
+        emission.enabled = true;
+        emission.rateOverTime = 40f;
+
+        ParticleSystem.ShapeModule shape = ashParticles.shape;
+        shape.enabled = true;
+        shape.shapeType = ParticleSystemShapeType.Box;
+        shape.scale = new Vector3(18f, 10f, 0.1f);
+
+        ParticleSystem.VelocityOverLifetimeModule velocity = ashParticles.velocityOverLifetime;
+        velocity.enabled = true;
+        velocity.space = ParticleSystemSimulationSpace.Local;
+        velocity.x = new ParticleSystem.MinMaxCurve(-particleRandomDrift, particleRandomDrift);
+        velocity.y = new ParticleSystem.MinMaxCurve(-particleRandomDrift * 0.4f, particleRandomDrift);
+        velocity.z = new ParticleSystem.MinMaxCurve(0f, 0f);
+
+        ParticleSystem.NoiseModule noise = ashParticles.noise;
+        noise.enabled = true;
+        noise.strength = particleNoiseStrength;
+        noise.frequency = 0.55f;
+        noise.scrollSpeed = 0.4f;
+        noise.damping = true;
+
+        ParticleSystemRenderer particleRenderer = ashParticles.GetComponent<ParticleSystemRenderer>();
+        if (particleRenderer != null)
+        {
+            particleRenderer.sortingOrder = overlaySortingOrder - 1;
         }
     }
 }

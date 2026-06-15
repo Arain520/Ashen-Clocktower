@@ -74,11 +74,6 @@ public class SlimeBattleState : EnemyState
         #endregion
 
         #region CaseThatQuitBattle
-        //如果遇到悬崖，则脱战进入idle
-        if (!slime.isGround)
-        {
-            slime.stateMachine.ChangeState(slime.idleState);
-        }
         //愤怒时间到了后，或者玩家距离超出范围，则脱战
         if (stateTimer < 0 || Vector2.Distance(slime.transform.position, PlayerManager.instance.player.transform.position) > slime.GetQuitBattleDisance())
         {

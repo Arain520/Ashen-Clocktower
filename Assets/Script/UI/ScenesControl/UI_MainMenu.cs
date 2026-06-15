@@ -64,6 +64,7 @@ public class UI_MainMenu : MonoBehaviour
     {
         //É¾³ı´æµµ
         SavesManager.instance.DeleteSavedGameDate();
+        NarrativePlaybackFlags.RequestNewGameIntro();
 
         //¼ÓÔØÓÎÏ·³¡¾°
         SceneManager.LoadScene("MainScene");

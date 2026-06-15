@@ -4,10 +4,12 @@ using UnityEngine;
 //注意这个using
 using System.Linq;
 using System.IO;
+using System;
 
 public class SavesManager : MonoBehaviour
 {
     public static SavesManager instance;
+    public static event Action OnGameSaved;
 
     //游戏数据
     //潜在问题：不同脚本加载顺序的不同会导致读取存储数据不同步，有人说可以把此处GameData设置为public来解决，不清楚有没有用
@@ -91,6 +93,8 @@ public class SavesManager : MonoBehaviour
 
         //在循环之后存储存档数据
         dataHandler.SaveGameData(gameData);
+
+        OnGameSaved?.Invoke();
 
         Debug.Log("游戏已保存！");
     }
